@@ -1,9 +1,14 @@
-## Admin panel backend
+## M360ICT
 
-### The process to run this project on the local machine
+## technologies
+- Nodejs
+- ExpressJs,
+- TypeScritp,
+- Postgresql
+- Knex
 
-- clone the project first
-- navigate to the project by `cd project name`
-- install all packages `npm install or yarn install`
-- you have to add all envernment varialbe in the `.env` file
-- npm run dev
+## Process to run the website locally
+- clone the repository `git clone repository link`
+- navigate the repository `cd repository name`
+- install all the packages by `npm install || yarn install`
+- `npm run dev` to start the project
