@@ -1,5 +1,8 @@
 import config from "./config";
 import fs from "fs";
+import path from "path";
+
+const caPemPath = path.join(__dirname, "..", "certificates", "ca.pem");
 
 const knexConfig = {
   development: {
@@ -11,15 +14,15 @@ const knexConfig = {
       password: config.postgreServer.service_password,
       port: 18042,
       ssl: {
-        ca: fs.readFileSync("./certificates/ca.pem"),
+        ca: fs.readFileSync(caPemPath),
       },
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "src/database/migrations",
+      directory: path.join(__dirname, "database", "migrations"),
     },
     seeds: {
-      directory: "src/database/seeds",
+      directory: path.join(__dirname, "database", "seeds"),
     },
   },
 
@@ -31,7 +34,7 @@ const knexConfig = {
       user: config.postgreServer.service_user,
       password: config.postgreServer.service_password,
       ssl: {
-        ca: fs.readFileSync("./certificates/ca.pem"),
+        ca: fs.readFileSync(caPemPath),
       },
     },
     pool: {
@@ -40,10 +43,10 @@ const knexConfig = {
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "src/database/migrations",
+      directory: path.join(__dirname, "database", "migrations"),
     },
     seeds: {
-      directory: "src/database/seeds",
+      directory: path.join(__dirname, "database", "seeds"),
     },
   },
 };

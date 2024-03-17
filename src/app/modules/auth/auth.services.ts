@@ -5,6 +5,7 @@ import config from "../../../config";
 import { JwtHelpers } from "../../../shared/jwtHelpers";
 import ApiError from "../../../errors/apiError";
 import db from "../../db/db";
+import { UserRoles } from "../../../enums/user.role";
 
 const createUser = async (payload: IUser) => {
   payload.password = await bcrypt.hash(
@@ -42,6 +43,7 @@ const LogIn = async (payload: ILogin): Promise<ILoginResponse> => {
   const accessToken = await JwtHelpers.createToken(
     {
       userId: isUserExist?.id,
+      role: UserRoles.USER,
     },
     config.jwt.access_secret as Secret,
     config.jwt.access_expire as string
