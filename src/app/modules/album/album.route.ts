@@ -19,6 +19,14 @@ router.post(
   ValidateRequest(AlmubValidation.addArtistToAlbum),
   AlbumController.addArtistsToAlbum
 );
+router.delete(
+  "/remove_artist_from_album",
+  auth("user"),
+  ValidateRequest(AlmubValidation.addArtistToAlbum),
+  AlbumController.removeArtistFromAlbum
+);
 router.get("/:albumId", auth("user"), AlbumController.retriveAlbums);
+
+router.delete("/:albumId", auth("user"), AlbumController.removeAlbum);
 
 export const albumRouter = router;

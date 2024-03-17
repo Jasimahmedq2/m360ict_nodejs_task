@@ -72,17 +72,29 @@ const retriveAlbums = async (
   return albumWithArtists;
 };
 
-const removeAlbum = async (
-  album_id: number
-): Promise<{ message: string }> => {
-  const remove = await db('albums').where({ id: album_id }).del();
+const removeAlbum = async (album_id: number): Promise<{ message: string }> => {
+  const remove = await db("albums").where({ id: album_id }).del();
   return {
-    message: "success"
-  }
+    message: "deleted",
+  };
+};
+
+const removeArtistFromAlbum = async (
+  album_id: number,
+  artist_id: number
+): Promise<{ message: string }> => {
+  const reomveArtist = await db("albums_artists")
+    .where({ album_id: album_id, artist_id: artist_id })
+    .del();
+  return {
+    message: "removed artist from album",
+  };
 };
 
 export const AlbumServices = {
   CreateAlbum,
   retriveAlbums,
   addArtistsToAlbum,
+  removeAlbum,
+  removeArtistFromAlbum,
 };

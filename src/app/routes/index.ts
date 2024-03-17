@@ -12,16 +12,16 @@ const CoreRoutes = [
     element: AuthRoutes,
   },
   {
-    path: "/artists",
-    element: artistRouter,
+    path: "/songs",
+    element: SongRouter,
   },
   {
     path: "/albums",
     element: albumRouter,
   },
   {
-    path: "/songs",
-    element: SongRouter,
+    path: "/artists",
+    element: artistRouter,
   },
 ];
 

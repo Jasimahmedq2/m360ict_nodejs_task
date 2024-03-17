@@ -11,5 +11,8 @@ router.post(
   ValidateRequest(SongValidation.createSong),
   SongControllers.createSong
 );
+router.get("/", auth("user"), SongControllers.retrieveSongs);
+router.post("/:songId", auth("user"), SongControllers.updateSong);
+router.delete("/:songId", auth("user"), SongControllers.deleteSong);
 
 export const SongRouter = router;

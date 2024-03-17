@@ -1,11 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
-import router from "./app/routes";
 import globalMiddleware from "./app/middleware/globalErrorHandler";
-import colors from "colors";
-import config from "./config";
-
-const port = 5000 || config.port;
+import router from "./app/routes";
 
 const app: Application = express();
 
@@ -15,12 +11,8 @@ app.use(cors());
 
 app.use("/api/v1", router);
 
-app.get("/", async (req: Request, res: Response) => {
-  res.send(`yee, the server is running successfully}`);
-});
-
-app.listen(port, () => {
-  console.log(colors.green("hey, I am listening the db perfectly"));
+app.get("/", (req: Request, res: Response) => {
+  res.send("yee, the server is running successfully, hello");
 });
 
 app.use(globalMiddleware);
