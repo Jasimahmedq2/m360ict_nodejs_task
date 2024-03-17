@@ -49,12 +49,36 @@ const addArtistsToAlbum = async (artist_id: number, album_id: number) => {
   return addArtist;
 };
 
-const retriveAlbums = async () => {
-  const Albums = await db("albums")
-    .join("albums_artists", "albums.id", "albums_artists.album_id")
-    .distinct()
-    .select("albums.*");
-  return Albums;
+const retriveAlbums = async (
+  albumId: number
+): Promise<{ album: IAlbum; artists: IArtists[] } | null> => {
+  const album: IAlbum | undefined = await db<IAlbum>("albums")
+    .where({ id: albumId })
+    .first();
+
+  if (!album) {
+    throw new ApiError(401, "album not found");
+  }
+
+  const artists: IArtists[] = await db<IArtists>("artists")
+    .join("albums_artists", "artists.id", "=", "albums_artists.artist_id")
+    .where("albums_artists.album_id", "=", albumId)
+    .select("artists.*");
+
+  const albumWithArtists: { album: IAlbum; artists: IArtists[] } = {
+    album,
+    artists,
+  };
+  return albumWithArtists;
+};
+
+const removeAlbum = async (
+  album_id: number
+): Promise<{ message: string }> => {
+  const remove = await db('albums').where({ id: album_id }).del();
+  return {
+    message: "success"
+  }
 };
 
 export const AlbumServices = {

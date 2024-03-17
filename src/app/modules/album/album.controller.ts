@@ -45,7 +45,8 @@ const retriveAlbums = async (
   next: NextFunction
 ) => {
   try {
-    const result = await AlbumServices.retriveAlbums();
+    const { albumId } = req.params;
+    const result = await AlbumServices.retriveAlbums(albumId);
     sendResponse(res, {
       statusCode: 200,
       success: true,

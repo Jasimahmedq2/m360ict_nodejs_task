@@ -19,6 +19,6 @@ router.post(
   ValidateRequest(AlmubValidation.addArtistToAlbum),
   AlbumController.addArtistsToAlbum
 );
-router.get("/retrieve", auth("user"), AlbumController.retriveAlbums);
+router.get("/:albumId", auth("user"), AlbumController.retriveAlbums);
 
 export const albumRouter = router;
